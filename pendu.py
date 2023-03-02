@@ -1,4 +1,6 @@
 from random import*
+diff = input("Choisissez une difficulté (débutant, intermédiaire, expert): ")
+
 myListDico = []
 
 with open('dico_france.txt','r') as file:
@@ -12,29 +14,48 @@ with open('dico_france.txt','r') as file:
 valeur = randint(0, len(myListDico))
 result = myListDico[valeur]
 print(result)
-user = []
-# print(myListDico[valeur])
+
+affichageUser = []
 for i in range(len(result)):
-    user.append("_")
-for j in user:
+    affichageUser.append("_")
+for j in affichageUser:
     print(j, end = " ")
 print("")
 
-vie = 10
-while vie > 0:
-    test = input("Rentrer une lettre: ")
+vie = 0
+match diff:
+    case "débutant":
+        vie = 10
+    case "intermédiaire":
+        vie = 7
+    case "expert":
+        vie = 3
 
-    if test in result:
-        for l in range(len(user)):
+under = "_"
+cpt = 0
+myListLetter = []
+while vie > 0:
+    proposition = input("Rentrer une lettre: ")
+    myListLetter.append(proposition)
+    if proposition in result:
+        for l in range(len(affichageUser)):
             for k in range(len(result)):
-                if result[k] == test:
-                    user[k] = test
-        for j in user:
+                if result[k] == proposition:
+                    affichageUser[k] = proposition
+        for j in affichageUser:
             print(j, end = " ")
     else: 
         vie = vie - 1
-        for j in user:
+        for j in affichageUser:
             print(j, end = " ")
+    if under not in affichageUser:
+        print("\nVous avez gagné")
+        exit()
     
+    if diff == "débutant" or diff == "intermédiaire":
+        print("\nLettres proposées: ", end = "")
+    for i in myListLetter:
+        print(i, end = " ")
     print("")
     print("Nombre de vie restantes: " + str(vie))
+print("Vous avez perdu")
