@@ -32,7 +32,6 @@ match diff:
         vie = 3
 
 under = "_"
-cpt = 0
 myListLetter = []
 while vie > 0:
     proposition = input("Rentrer une lettre: ")
